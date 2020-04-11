@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kitty-grid in examples 😼</title>
+  <meta name="keywords" content="kitty-grid kitty grid scss grid css grid scss layout css layout">
+  <meta name="description" content="Kitti-grid is lightweight, modern, fluid, responsive, based on flexbox scss grid">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+
+    <h1 id="h1">Kitty-grid in examples 😼</h1>
+    
+    <strong>
+      <em>
+        <q>
+
+          Kitti-grid is lightweight, modern, fluid, responsive, based on flexbox scss grid. The main features - its easy to use and to understand, really easy!
+          Also you may easily set column count for object, just put in mixin argument neccessary part of all columns in row e.g. <span class="code">@include size(3/12)</span>, <span class="code">@include size(1/5)</span>
+          and you may change default gutters in case it's needed e.g. <span class="code">@include row(-20px)</span>, <span class="code">@include col(20px)</span>, <span class="code">@include size(1/3, 20px)</span>.
+          <br>
+          Repo contains 2 files - desktop-first set and mobile-first(bootstrap) set. You may choose one you need on your project.
+          If default sets are unsuitable you can easily change them. 
+
+
+        </q>
+      </em>
+    </strong>
+
+    <p><a href="">github page</a></p>
+
+    <p><strong>I review desktop-first set, if you like bootstrap or mobile-first approach at whole I think you know what
+        to do
+        :)</strong>
+    </p>
+
+    <p><strong>Additionally I use <a href="https://www.npmjs.com/package/gulp-autoprefixer">autoprefixer</a>, <a
+          href="https://www.npmjs.com/package/gulp-cssnano">cssnano</a> and <a
+          href="https://www.npmjs.com/package/gulp-group-css-media-queries">group-css-media-queries</a>,
+        but presented output code was modified only with <em>group-css-media-queries</em>.</strong>
+    </p>
+
+    <p>Navigation:</p>
+    <ul>
+      <li><a href="#interior">Few interior features</a></li>
+      <li><a href="#basic">Basic</a></li>
+      <li><a href="#offset">Offset and custom row</a></li>
+      <li><a href="#adaptive">Adaptive width</a></li>
+      <li><a href="#auto">Auto width</a></li>
+      <li><a href="#stretched">Last items stretched</a></li>
+      <li><a href="#centered">Last items centered</a></li>
+      <li><a href="#gutters">Custom gutters</a></li>
+      <li><a href="#fullwidth">Full width container and no gutters row/items</a></li>
+      <li><a href="#basic-o">Output css</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+    </ul>
+
+    <h2 id="interior">Few interior features</h2>
+
+    <p>
+      Default variables:
+
+      <p><em> - My designer like to use custom layouts, so gutters change when screen width is reduced.</em></p>
+
+      <pre>
+        <code>
+          // desktop first breakpoints
+          $break_xlg : 1440px;
+          $break_lg : 1100px;
+          $break_md : 920px;
+          $break_sm : 640px;
+          $break_xs : 480px;
+
+          // container, variables and fluid mobile gutters
+          $mob-padding: 15px;
+
+          :root {
+              --content-width: 1160px;
+              --gutter: 15px;
+          }
+
+          @include md {
+              :root {
+                  --gutter: 10px;
+              }
+          }
+        </code>
+      </pre>
+    </p>
+
+    <p>
+      Default clases:
+      <ul>
+        <li><span class="code"> .container</span></li>
+        <li><span class="code"> .container-fluid</span></li>
+        <li><span class="code"> .row</span></li>
+        <li><span class="code"> .row_no-gutter</span></li>
+      </ul>
+    </p>
+    <p>Mixins to use:
+      <ul>
+        <li>for media:
+          <ul>
+            <li><span class="code"> @mixin xlg{@content}</span></li>
+            <li><span class="code"> @mixin lg{@content}</span></li>
+            <li><span class="code"> @mixin md{@content}</span></li>
+            <li><span class="code"> @mixin sm{@content}</span></li>
+            <li><span class="code"> @mixin xs{@content}</span></li>
+          </ul>
+        </li>
+        <li>for layout:
+          <ul>
+            <li><span class="code"> @mixin row($gutter:false){...}</span></li>
+            <li><span class="code"> @mixin no-gutter {...}</span></li>
+            <li><span class="code"> @mixin col($gutter: var(--gutter)) {...}</span></li>
+            <li><span class="code"> @mixin size($col, $gutter: var(--gutter)) {...}</span></li>
+            <li><span class="code"> @mixin offset($col:false, $gutter: var(--gutter)) {...}</span></li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+
+    <p><strong><em>>>> Change window width to see result.</em></strong></p>
+
+
+
+    <h2 id="basic">Basic </h2>
+
+    <div class="wrap">
+      <div class="row">
+        <div class="row__item">1</div>
+        <div class="row__item">2</div>
+        <div class="row__item">3</div>
+        <div class="row__item">4</div>
+        <div class="row__item">5</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+        <code>
+          &lt;div class="container"&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="row__item"&gt;1&lt;/div&gt;
+              &lt;div class="row__item"&gt;2&lt;/div&gt;
+              &lt;div class="row__item"&gt;3&lt;/div&gt;
+              &lt;div class="row__item"&gt;4&lt;/div&gt;
+              &lt;div class="row__item"&gt;5&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .row {
+            &__item {
+              @include col();
+              @include size(1/3);
+          
+              @include md {
+                @include size(1/5);
+              }
+          
+              @include sm {
+                @include size(1);
+              }
+
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#basic-o">&gt; Output css</a> </p>
+
+
+    <h2 id="offset">Offset and custom row</h2>
+
+    <div class="wrap">
+      <div class="custom-row">
+        <div class="custom-row__item">1</div>
+        <div class="custom-row__item">2</div>
+        <div class="custom-row__item custom-row__item_offset">3</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="custom-row"&gt;
+            &lt;div class="custom-row__item"&gt;1&lt;/div&gt;
+            &lt;div class="custom-row__item"&gt;2&lt;/div&gt;
+            &lt;div class="custom-row__item custom-row__item_offset"&gt;3&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .custom-row {
+            @include row();
+          
+            &__item {
+              @include col();
+              @include size(1/5);
+          
+              @include md{
+                @include size(1/3);
+              }
+          
+              &_offset {
+                @include offset(1/5);
+          
+                @include md{
+                  @include size(1/3);
+                  @include offset();
+                }
+
+              }
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#offset-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="adaptive">Adaptive width</h2>
+
+    <div class="wrap">
+      <div class="adaptive">
+        <div class="adaptive__item adaptive__item_adaptive">1</div>
+        <div class="adaptive__item">2</div>
+        <div class="adaptive__item adaptive__item_adaptive">3</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="adaptive"&gt;
+            &lt;div class="adaptive__item adaptive__item_adaptive"&gt;1&lt;/div&gt;
+            &lt;div class="adaptive__item"&gt;2&lt;/div&gt;
+            &lt;div class="adaptive__item adaptive__item_adaptive"&gt;3&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .adaptive {
+            @include row();
+          
+            &__item {
+              @include col();
+              @include size(1/5);
+          
+              @include md{
+                @include size(4/6);
+              }
+          
+              &_adaptive {
+                @include size(adaptive);
+          
+                @include md{
+                  @include size(adaptive);
+                }
+
+              }
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#adaptive-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="auto">Auto width </h2>
+
+    <div class="wrap">
+      <div class="auto">
+        <div class="auto__item auto__item_auto">11111111111111111111</div>
+        <div class="auto__item">2</div>
+        <div class="auto__item auto__item_auto">33333333333</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="auto"&gt;
+            &lt;div class="auto__item auto__item_auto"&gt;11111111111111111111&lt;/div&gt;
+            &lt;div class="auto__item"&gt;2&lt;/div&gt;
+            &lt;div class="auto__item auto__item_auto"&gt;33333333333&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .auto {
+            @include row();
+          
+            &__item {
+              @include col();
+              @include size(1/3);
+          
+              @include md{
+                @include size(2/7);
+              }
+          
+              &_auto {
+                @include size(auto);
+          
+                @include md{
+                  @include size(2/7);
+                }
+          
+              }
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#auto-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="stretched">Last items stretched</h2>
+
+    <div class="wrap">
+      <div class="stretched">
+        <div class="stretched__item">1</div>
+        <div class="stretched__item">2</div>
+        <div class="stretched__item">3</div>
+        <div class="stretched__item">4</div>
+        <div class="stretched__item">5</div>
+        <div class="stretched__item">6</div>
+        <div class="stretched__item">7</div>
+        <div class="stretched__item">8</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="stretched"&gt;
+            &lt;div class="stretched__item"&gt;1&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;2&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;3&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;4&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;5&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;6&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;7&lt;/div&gt;
+            &lt;div class="stretched__item"&gt;8&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .stretched {
+            @include row();
+          
+            &__item {
+              @include col();
+              @include size(1/3);
+              flex-grow: 1;
+            }
+
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#stretched-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="centered">Last items centered</h2>
+
+    <div class="wrap">
+      <div class="centered">
+        <div class="centered__item">1</div>
+        <div class="centered__item">2</div>
+        <div class="centered__item">3</div>
+        <div class="centered__item">4</div>
+        <div class="centered__item">5</div>
+        <div class="centered__item">6</div>
+        <div class="centered__item">7</div>
+        <div class="centered__item">8</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="centered"&gt;
+            &lt;div class="centered__item"&gt;1&lt;/div&gt;
+            &lt;div class="centered__item"&gt;2&lt;/div&gt;
+            &lt;div class="centered__item"&gt;3&lt;/div&gt;
+            &lt;div class="centered__item"&gt;4&lt;/div&gt;
+            &lt;div class="centered__item"&gt;5&lt;/div&gt;
+            &lt;div class="centered__item"&gt;6&lt;/div&gt;
+            &lt;div class="centered__item"&gt;7&lt;/div&gt;
+            &lt;div class="centered__item"&gt;8&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .centered {
+            @include row();
+            justify-content: center;
+
+            @include md{
+              justify-content: flex-start;
+            }
+          
+            &__item {
+              @include col();
+              @include size(1/3);
+            }
+
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#centered-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="gutters">Custom gutters </h2>
+
+    <div class="wrap">
+      <div class="custom-gutters">
+        <div class="custom-gutters__item">1</div>
+        <div class="custom-gutters__item">2</div>
+        <div class="custom-gutters__item">3</div>
+        <div class="custom-gutters__item">4</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container"&gt;
+          &lt;div class="custom-gutters"&gt;
+            &lt;div class="custom-gutters__item"&gt;1&lt;/div&gt;
+            &lt;div class="custom-gutters__item"&gt;2&lt;/div&gt;
+            &lt;div class="custom-gutters__item"&gt;3&lt;/div&gt;
+            &lt;div class="custom-gutters__item"&gt;4&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .custom-gutters {
+            @include row(-5px);
+            justify-content: center;
+          
+            @include md{
+              @include row(-30px);
+            }
+          
+            &__item {
+              @include col(5px);
+              @include size(1/4, 5px);
+          
+              @include md{
+                @include col(30px);
+                @include size(1/3, 30px);
+              }
+          
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#gutters-o">&gt; Output css</a> </p>
+
+
+
+
+
+    <h2 id="fullwidth">Full width container and no-gutters row/items</h2>
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="wrap">
+      <div class="row-wide">
+        <div class="row-wide__item">1</div>
+        <div class="row-wide__item">2</div>
+        <div class="row-wide__item">3</div>
+        <div class="row-wide__item">4</div>
+        <div class="row-wide__item">5</div>
+        <div class="row-wide__item">6</div>
+        <div class="row-wide__item">7</div>
+        <div class="row-wide__item">8</div>
+        <div class="row-wide__item">9</div>
+        <div class="row-wide__item">10</div>
+        <div class="row-wide__item">11</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+        &lt;div class="container-fluid"&gt;
+          &lt;div class="row-wide"&gt;
+            &lt;div class="row-wide__item"&gt;1&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;2&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;3&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;4&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;5&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;6&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;7&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;8&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;9&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;10&lt;/div&gt;
+            &lt;div class="row-wide__item"&gt;11&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          .row-wide {
+            @include row(0);
+            //@include no-gutter;  -- you can use this mixin instead '0'
+          
+            &__item {
+              @include col(0);
+              @include size(1/4, 0);
+
+              @include md{
+                @include size(1/3, 0);
+              }
+
+              @include sm{
+                @include size(1/2, 0);
+              }
+          
+              &:nth-child(9n+1), &:nth-child(9n+5), &:nth-child(9n+9) {
+                @include size(2/4, 0);
+
+                @include md{
+                  @include size(1/3, 0);
+                }
+
+                @include sm{
+                  @include size(1/2, 0);
+                }
+
+              }
+          
+            }
+          }
+        </code>
+    </pre>
+
+    <p> <a href="#fullwidth-o">&gt; Output css</a> </p>
+
+    <!-- <h2 id="">:</h2>
+
+    <div class="wrap">
+      <div class="custom-gutters">
+        <div class="custom-gutters__item custom-gutters__item_adaptive">1</div>
+        <div class="custom-gutters__item">2</div>
+        <div class="custom-gutters__item custom-gutters__item_adaptive">3</div>
+      </div>
+    </div>
+
+    <p>Html:</p>
+
+    <pre>
+      <code>
+       
+      </code>
+    </pre>
+
+    <p>Scss:</p>
+
+    <pre>
+        <code>
+          
+        </code>
+    </pre>
+
+    <p> <a href="#">&gt; Output css</a> </p> -->
+
+    <hr>
+
+    <p id="basic-o"> Output css for <a href="#basic">#basic</a> example</p>
+
+    <pre>
+      <code>
+        .row {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+        }
+        .row__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-grow: 0;
+        }
+        @media screen and (max-width: 920px) {
+          .row__item {
+            width: calc(100% * 0.2 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.2 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          .row__item {
+            width: calc(100% * 1 - var(--gutter) * 2);
+            flex-basis: calc(100% * 1 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+        }
+      </code>
+    </pre>
+
+    <p id="offset-o"> Output css for <a href="#offset">#offset</a> example</p>
+
+    <pre>
+      <code>
+        .custom-row {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+        }
+        .custom-row__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.2 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.2 - var(--gutter) * 2);
+          flex-grow: 0;
+        }
+        .custom-row__item_offset {
+          margin-left: calc(100% * 0.2 + var(--gutter));
+        }
+        @media screen and (max-width: 920px) {
+          .custom-row__item {
+            width: calc(100% * 0.33333 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+          .custom-row__item_offset {
+            width: calc(100% * 0.33333 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+            flex-grow: 0;
+            margin-left: var(--gutter);
+          }
+        }
+        
+      </code>
+    </pre>
+
+    <p id="adaptive-o"> Output css for <a href="#adaptive">#adaptiveWidth</a> example</p>
+
+    <pre>
+      <code>
+        .adaptive {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+        }
+        .adaptive__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.2 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.2 - var(--gutter) * 2);
+          flex-grow: 0;
+        }
+        .adaptive__item_adaptive {
+          width: 100%;
+          flex-basis: 0;
+          flex-grow: 1;
+        }
+        @media screen and (max-width: 920px) {
+          .adaptive__item {
+            width: calc(100% * 0.66667 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.66667 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+          .adaptive__item_adaptive {
+            width: 100%;
+            flex-basis: 0;
+            flex-grow: 1;
+          }
+        }
+        
+      </code>
+    </pre>
+
+    <p id="auto-o"> Output css for <a href="#auto">#autoWidth</a> example</p>
+
+    <pre>
+      <code>
+        .auto {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+        }
+        .auto__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-grow: 0;
+        }
+        .auto__item_auto {
+          width: auto;
+          flex-basis: auto;
+          flex-grow: 0;
+        }
+        @media screen and (max-width: 920px) {
+          .auto__item {
+            width: calc(100% * 0.28571 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.28571 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+          .auto__item_auto {
+            width: calc(100% * 0.28571 - var(--gutter) * 2);
+            flex-basis: calc(100% * 0.28571 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+        }
+        
+      </code>
+    </pre>
+
+    <p id="stretched-o"> Output css for <a href="#stretched">#lastItemsStretched</a> example</p>
+
+    <pre>
+      <code>
+        .stretched {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+        }
+        
+        .stretched__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-grow: 0;
+          flex-grow: 1;
+        }
+        
+      </code>
+    </pre>
+
+    <p id="centered-o"> Output css for <a href="#centered">#lastItemsCentered</a> example</p>
+
+    <pre>
+      <code>
+        .centered {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: calc(var(--gutter) * -1);
+          margin-right: calc(var(--gutter) * -1);
+          justify-content: center;
+        }
+        .centered__item {
+          box-sizing: border-box;
+          margin-left: var(--gutter);
+          margin-right: var(--gutter);
+          width: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-basis: calc(100% * 0.33333 - var(--gutter) * 2);
+          flex-grow: 0;
+        }
+        @media screen and (max-width: 920px) {
+          .centered {
+            justify-content: flex-start;
+          }
+        }
+        
+      </code>
+    </pre>
+
+    <p id="gutters-o"> Output css for <a href="#gutters">#customGutters</a> example</p>
+
+    <pre>
+      <code>
+        .custom-gutters {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: -5px;
+          margin-right: -5px;
+          justify-content: center;
+        }
+        .custom-gutters__item {
+          box-sizing: border-box;
+          margin-left: 5px;
+          margin-right: 5px;
+          width: calc(100% * 0.25 - 5px * 2);
+          flex-basis: calc(100% * 0.25 - 5px * 2);
+          flex-grow: 0;
+        }
+        @media screen and (max-width: 920px) {
+          .custom-gutters {
+            display: flex;
+            flex-wrap: wrap;
+            clear: both;
+            margin-left: -30px;
+            margin-right: -30px;
+          }
+          .custom-gutters__item {
+            box-sizing: border-box;
+            margin-left: 30px;
+            margin-right: 30px;
+            width: calc(100% * 0.33333 - 30px * 2);
+            flex-basis: calc(100% * 0.33333 - 30px * 2);
+            flex-grow: 0;
+          }
+        }
+        
+      </code>
+    </pre>
+
+    <p id="fullwidth-o"> Output css for <a href="#gutters">#fullWidthContainer</a> example</p>
+
+    <pre>
+      <code>
+        .row-wide {
+          display: flex;
+          flex-wrap: wrap;
+          clear: both;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .row-wide__item {
+          box-sizing: border-box;
+          margin-left: 0;
+          margin-right: 0;
+          width: calc(100% * 0.25);
+          flex-basis: calc(100% * 0.25);
+          flex-grow: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 0;
+          padding: 50px 10px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .row-wide__item:nth-child(odd) {
+          background: #8f76ff;
+        }
+        .row-wide__item:nth-child(even) {
+          background: #615761;
+        }
+        .row-wide__item:nth-child(9n+1),
+        .row-wide__item:nth-child(9n+5),
+        .row-wide__item:nth-child(9n+9) {
+          width: calc(100% * 0.5);
+          flex-basis: calc(100% * 0.5);
+          flex-grow: 0;
+        }
+        @media screen and (max-width: 920px) {
+          .row-wide__item {
+            width: calc(100% * 0.33333);
+            flex-basis: calc(100% * 0.33333);
+            flex-grow: 0;
+          }
+          .row-wide__item:nth-child(9n+1),
+          .row-wide__item:nth-child(9n+5),
+          .row-wide__item:nth-child(9n+9) {
+            width: calc(100% * 0.33333);
+            flex-basis: calc(100% * 0.33333);
+            flex-grow: 0;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          .row__item {
+            width: calc(100% * 1 - var(--gutter) * 2);
+            flex-basis: calc(100% * 1 - var(--gutter) * 2);
+            flex-grow: 0;
+          }
+          .row-wide__item {
+            width: calc(100% * 0.5);
+            flex-basis: calc(100% * 0.5);
+            flex-grow: 0;
+          }
+          .row-wide__item:nth-child(9n+1),
+          .row-wide__item:nth-child(9n+5),
+          .row-wide__item:nth-child(9n+9) {
+            width: calc(100% * 0.5);
+            flex-basis: calc(100% * 0.5);
+            flex-grow: 0;
+          }
+        
+      </code>
+    </pre>
+
+    <hr>
+
+    <p id="contacts">If you have some questions you may contact me via telegram <a
+        href="https://t.me/dendash">@dendash</a></p>
+
+    <p>My english is very good I know :)</p>
+
+    <p><a href="">github page</a></p>
+
+    <p><a href="#h1">Go to top</a></p>
+
+  </div>
+</body>
+
+</html>
